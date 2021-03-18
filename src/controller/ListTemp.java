@@ -118,6 +118,34 @@ public class ListTemp {
 	}
 	
 	
+	public int removeAny (int position) {
+		
+		Node aux1, aux2;
+		aux1 = first;
+		aux2 = first.next;
+		int ret;
+		
+		while (true){
+			
+			if (aux1.next.getItem() != position) {
+				
+				aux1 = aux1.next;
+				aux2 = aux2.next;
+				
+			} else {
+				aux1 = aux1.next;
+				aux2 = aux2.next;
+				aux1.next = aux2.next;
+				;
+				
+			}
+			ret = aux2.getItem();
+			return ret;
+		}
+
+	}
+	
+	
 	public Node get(int position){
 		Node current = first;
 		

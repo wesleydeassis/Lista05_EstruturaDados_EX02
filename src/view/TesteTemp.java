@@ -12,9 +12,9 @@ public class TesteTemp {
 
 		ListTemp temp = new ListTemp();
 
-		while (opcao != 9) {
+		while (opcao != 00) {
 			opcao = Integer.parseInt(JOptionPane.showInputDialog(
-					" *********Temperatura********** \n1-Estado da Fila \n2-Adição inicio lista \n3-Adição ao fim da lista \n4-Adição em qualquer posição \n5-Remover do final \n6-Remover Inicio  \n7-Mostrar Lista \n00-Sair  "));
+					" *********Temperatura********** \n1-Estado da Fila \n2-Adição inicio lista \n3-Adição ao fim da lista \n4-Adição em qualquer posição \n5-Remover do final \n6-Remover Inicio \n7 - Remover de determinada posição \n8-Mostrar Lista \n00-Sair  "));
 
 			switch (opcao) {
 			case 1:
@@ -52,10 +52,19 @@ public class TesteTemp {
 				break;
 
 			
+						
 			case 7:
-				temp.runLista();
+				int ret;
+				loc =  Integer.parseInt(JOptionPane.showInputDialog("Informe a posição de retirada: "));
+				ret= temp.removeAny(loc-1);
+				System.out.println("O valor removido foi: "+ret);
+				
 				break;
 
+			case 8:
+				temp.runLista();
+				break;
+				
 			case 00:
 				System.out.println("Sistema finalizado");
 				break;
