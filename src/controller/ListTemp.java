@@ -1,9 +1,11 @@
 package controller;
 
+import javax.swing.JOptionPane;
+
 public class ListTemp {
 	private Node first;
 	private Node last;
-	private int size;
+	private static int size;
 	
 	public ListTemp() {
 		first = null;
@@ -38,16 +40,25 @@ public class ListTemp {
 	
 	public void insertEnd(int nItem){
 		
-		Node nList = new Node(nItem);
+		
 		if (first==null && last==null){
-			first = nList;
-			last = nList;
+			Node nNode = new Node(nItem);
+			first = nNode;
+			last = nNode;
 			
 		}
 		else
 		{
-			last.setNext(nList);
-			last=nList;
+			
+			Node aux = first;	
+			
+			while (aux.next != null) {		
+				aux = aux.next;				
+			} 
+
+			Node nNode = new Node(nItem);				
+			aux.next = nNode;	
+			
 			
 		}
 		
@@ -58,39 +69,103 @@ public class ListTemp {
 	public void insertBeg(int nItem){
 		
 		
-		Node  n = new Node(nItem);	
+		Node  nNode = new Node(nItem);	
 		
-		n.next = first;						
-		first = n;	
+		nNode.next = first;						
+		first = nNode;	
 		
 		
 	}
 	
-	
-	
-	public Node get(int posicao){
-		Node atual = first;
+	public int removeBeg(){
 		
-		for(int i = 0; i<= posicao; i++){
-			if(atual.getNext()!=null){
-				atual = atual.getNext();
+		int removed=0;
+	
+	if (first == null) {
+		System.out.println("A Lista está vazia");
+	} 
+	else {
+		removed = first.getItem();			
+		first = first.next;			
+	} 
+	return removed;
+	}
+	
+	
+	public int removeEnd(){
+		int removed = 0;								
+		if (first == null ) {
+			JOptionPane.showConfirmDialog(null, "A não tem elementos");
+		}
+		else {
+			if (first.next == null) {			
+				removed = first.getItem();				
+				first = null;					
+			} 
+			else {
+				Node aux1 = first, aux2 = first;
+				
+				while (aux1.next != null) {  
+					aux2 = aux1;			
+					aux1 = aux1.next;		
+				} 
+				
+				removed = aux1.getItem();				
+				aux2.next = null;			
+			} 
+		} 
+		return removed;
+	}
+	
+	
+	public Node get(int position){
+		Node current = first;
+		
+		for(int i = 0; i<= position; i++){
+			if(current.getNext()!=null){
+				current = current.getNext();
 				
 			
 			}
 		
 			}
-		return atual;
+		return current;
 		
 			
 		}
 
 		
-	
-	
-	public void remove(String newValue){
+	public void insertP(int nItem, int pos){
+		Node nov = new Node(nItem);
+		Node aux = first;
+		
+		if(pos==size){
+			insertEnd(nItem);
+		}
+		else
+			if(pos==0){
+				insertBeg(nItem);
+		}
+			else{
+				
+				for(int i= 0; i< pos-1; i++){
+					aux = aux.getNext();
+				}
+				nov.setNext(aux.getNext());
+				aux.setNext(nov);
+				aux = nov;
+				
+			}
+			size++;
+		
+		
+
+		
 		
 	}
 	
+	
+
 
 	public void runLista() {
 		if (first == null) {
@@ -107,6 +182,8 @@ public class ListTemp {
 		} 
 		System.out.println("---------------");
 	} 
+	
+	
 	
 	
 
